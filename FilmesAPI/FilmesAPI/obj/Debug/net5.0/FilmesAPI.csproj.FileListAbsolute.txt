@@ -53,5 +53,4 @@ C:/Users/Almeida-PC/Documents/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/obj/Deb
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/obj/Debug/net5.0/FilmesAPI.pdb
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/obj/Debug/net5.0/FilmesAPI.genruntimeconfig.cache
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/obj/Debug/net5.0/ref/FilmesAPI.dll
-/home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/FilmesAPI.StaticWebAssets.xml
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/obj/Debug/net5.0/refint/FilmesAPI.dll

@@ -6,6 +6,7 @@ namespace FilmesAPI.Models
     {
         // Informações do Filme
 
+        public int IdFilme { get; set; }
         // Required: Validação de campo obrigatório com mensagem de erro especifica
         [Required(ErrorMessage = "O campo título é obrigatório.")]
         public string Titulo { get; set; }
