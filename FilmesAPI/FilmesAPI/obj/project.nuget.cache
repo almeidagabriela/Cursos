@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "/cbbl/HAh0CVQtS23fI278APClot8iT52kS3ypM501XAeTRTiQbqVHxeOHJvJr/7YUwgD8MXk6HxyW6VefQebA==",
+  "dgSpecHash": "uEVbSZ1VB7VJ74y38sIS+jwdzeB41LD5KFwRZdGnUZZMB0Ygm42bRL77FvwaJsv9SAbWZDp66takbrtqRlaiPw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Almeida-PC\\Documents\\Desenvolvimento\\Cursos\\FilmesAPI\\FilmesAPI\\FilmesAPI.csproj",
+  "projectFilePath": "/home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/FilmesAPI.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Almeida-PC\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
-    "C:\\Users\\Almeida-PC\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
-    "C:\\Users\\Almeida-PC\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
-    "C:\\Users\\Almeida-PC\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
-    "C:\\Users\\Almeida-PC\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
-    "C:\\Users\\Almeida-PC\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+    "/home/galmeida/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/home/galmeida/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/home/galmeida/.nuget/packages/swashbuckle.aspnetcore/5.6.3/swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "/home/galmeida/.nuget/packages/swashbuckle.aspnetcore.swagger/5.6.3/swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "/home/galmeida/.nuget/packages/swashbuckle.aspnetcore.swaggergen/5.6.3/swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "/home/galmeida/.nuget/packages/swashbuckle.aspnetcore.swaggerui/5.6.3/swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
   ],
   "logs": []
 }
