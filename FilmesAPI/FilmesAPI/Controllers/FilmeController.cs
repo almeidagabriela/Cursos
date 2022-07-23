@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic; // Reconhece o uso do List
+using System.Linq;
 
 namespace FilmesAPI.Controllers
 {
@@ -32,9 +33,34 @@ namespace FilmesAPI.Controllers
         // Utilizando o IEnumerable nós garantimos que se caso mudarmos o retorno (lista de filmes), o método não vai quebrar
         // GET: Verbo HTTP para consultar informação
         [HttpGet]
-        public IEnumerable<Filme> RecuperarFilmes()
+        public IEnumerable<Filme> RecuperaFilmes()
         {
             return filmes;
+        }
+
+        // Método para recuperar um filme especifico
+        // Especificando no verbo HTTP que há recebimento de parametro
+        [HttpGet("{id}")]
+        public Filme RecuperaFilmesPorId(int id)
+        {
+            // Opção 1
+
+            // // Para cada filme da lista
+            // foreach(Filme filme in filmes) 
+            // {
+            //     // Verifica se o id do filme é igual ao passado por parametro
+            //     if(filme.IdFilme == id)
+            //     {
+            //         return filme;
+            //     }
+            // }
+
+            // return null;
+
+            // Opção 2
+            
+            // Caso não encontre o id, o "default" é o retorno nulo com o status HTTP 204 No Content
+            return filmes.FirstOrDefault(filme => filme.IdFilme == id);
         }
     }
 }
