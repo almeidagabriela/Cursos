@@ -95,5 +95,51 @@ namespace FilmesAPI.Controllers
             //Caso não tenha encontrado o filme, o retorno será o status HTTP 404
             return NotFound();
         }
+
+        // Verbo para atualizacao de recursos do sistema
+        [HttpPut("{id}")]
+        public IActionResult AtualizaFilme(int id, [FromBody] Filme novoFilme)
+        {
+            // Recuperando os dados do filme pelo ID
+            Filme filme = _context.Filmes.FirstOrDefault(filme => filme.IdFilme == id);
+
+            // Caso não encontre o filme
+            if(filme == null)
+            {
+                return NotFound(); // Retorna um "não encontrado"
+            }
+
+            // Atualização campo a campo (não é a melhor forma)
+            filme.Titulo = novoFilme.Titulo;
+            filme.Diretor = novoFilme.Diretor;
+            filme.Genero = novoFilme.Genero;
+            filme.Duracao = novoFilme.Duracao;
+
+            // Salvar mudanças
+            _context.SaveChanges();
+            // Ao realizar o retorno de um put, não retornamos nenhum conteúdo
+            return NoContent();
+        }
+
+        // Verbo para deletar um recurso do sistema por ID
+        [HttpDelete("{id}")]
+        public IActionResult DeletaFilme(int id)
+        {
+            // Recuperando os dados do filme pelo ID
+            Filme filme = _context.Filmes.FirstOrDefault(filme => filme.IdFilme == id);
+
+            // Caso não encontre o filme
+            if(filme == null)
+            {
+                return NotFound(); // Retorna um "não encontrado"
+            }
+
+            // Removendo filme
+            _context.Remove(filme);
+            _context.SaveChanges();
+
+            // Ao realizar o retorno de um delete, não retornamos nenhum conteúdo
+            return NoContent();
+        }
     }
 }
