@@ -6,6 +6,8 @@ namespace FilmesAPI.Models
     {
         // Informações do Filme
 
+        [Key] // Identifica a chave primaria
+        [Required]
         public int IdFilme { get; set; }
         // Required: Validação de campo obrigatório com mensagem de erro especifica
         [Required(ErrorMessage = "O campo título é obrigatório.")]
