@@ -1,4 +1,5 @@
 ﻿using FilmesAPI.Data;
+using FilmesAPI.Data.DTOs;
 using FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,10 +27,19 @@ namespace FilmesAPI.Controllers
 
         // Definindo o verbo HTTP como "salvar", para identificar o uso do nosso método
         [HttpPost]
-        public IActionResult AdicionaFilme([FromBody] Filme filme) // "FromBody" indica que esperamos o parametro através do corpo da requisição
+        public IActionResult AdicionaFilme([FromBody] CreateFilmeDto filmeDTO) // "FromBody" indica que esperamos o parametro através do corpo da requisição
         {
             // TESTE: Validando o filme que estamos recebendo
             //Console.WriteLine(filme.Titulo);
+
+            // Converte o filmeDTO em um filme (criando objeto com construtor implicito)
+            Filme filme = new Filme
+            {
+                Titulo = filmeDTO.Titulo,
+                Diretor = filmeDTO.Diretor,
+                Genero = filmeDTO.Genero,
+                Duracao = filmeDTO.Duracao
+            };
 
             // Adicionando o filme no banco
             _context.Filmes.Add(filme);
@@ -88,8 +98,19 @@ namespace FilmesAPI.Controllers
 
             if(filme != null)
             {
-                //Retorna status HTTP 200
-                return Ok(filme);
+                // Populando o DTO com base no filme recuperado
+                ReadFilmeDto filmeDto = new ReadFilmeDto
+                {
+                    IdFilme = filme.IdFilme,
+                    Titulo = filme.Titulo,
+                    Diretor = filme.Diretor,
+                    Genero = filme.Genero,
+                    Duracao = filme.Duracao,
+                    HoraDaConsulta = DateTime.Now
+                };
+
+                //Retorna dados do filme com status HTTP 200
+                return Ok(filmeDto);
             }
 
             //Caso não tenha encontrado o filme, o retorno será o status HTTP 404
@@ -98,7 +119,7 @@ namespace FilmesAPI.Controllers
 
         // Verbo para atualizacao de recursos do sistema
         [HttpPut("{id}")]
-        public IActionResult AtualizaFilme(int id, [FromBody] Filme novoFilme)
+        public IActionResult AtualizaFilme(int id, [FromBody] UpdateFilmeDto filmeDTO)
         {
             // Recuperando os dados do filme pelo ID
             Filme filme = _context.Filmes.FirstOrDefault(filme => filme.IdFilme == id);
@@ -110,10 +131,10 @@ namespace FilmesAPI.Controllers
             }
 
             // Atualização campo a campo (não é a melhor forma)
-            filme.Titulo = novoFilme.Titulo;
-            filme.Diretor = novoFilme.Diretor;
-            filme.Genero = novoFilme.Genero;
-            filme.Duracao = novoFilme.Duracao;
+            filme.Titulo = filmeDTO.Titulo;
+            filme.Diretor = filmeDTO.Diretor;
+            filme.Genero = filmeDTO.Genero;
+            filme.Duracao = filmeDTO.Duracao;
 
             // Salvar mudanças
             _context.SaveChanges();
