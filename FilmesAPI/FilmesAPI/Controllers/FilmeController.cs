@@ -1,4 +1,5 @@
-﻿using FilmesAPI.Models;
+﻿using FilmesAPI.Data;
+using FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic; // Reconhece o uso do List
@@ -12,21 +13,28 @@ namespace FilmesAPI.Controllers
     [Route("[controller]")]
     public class FilmeController : ControllerBase
     {
-        // Criando lista de filmes para "salvar"
-        private static List<Filme> filmes = new List<Filme>();
-        private static int id = 1; // Identificador de cada filme cadastrado
+        /* Utilizando o context criado para comunicação com o banco
+            Podemos utiliza-lo para acessar, guardar e recuperar informações no banco
+        */
+        private FilmeContext _context;
+
+        // Inicializando o _context via construtor
+        public FilmeController(FilmeContext context)
+        {
+            _context = context;
+        }
 
         // Definindo o verbo HTTP como "salvar", para identificar o uso do nosso método
         [HttpPost]
         public IActionResult AdicionaFilme([FromBody] Filme filme) // "FromBody" indica que esperamos o parametro através do corpo da requisição
         {
-            // Incrementando o id para cada cadastro feito
-            filme.IdFilme = id++;
-            // Guardando os filmes atraves de uma lista
-            filmes.Add(filme);
-
-            // Validando o filme que estamos recebendo
+            // TESTE: Validando o filme que estamos recebendo
             //Console.WriteLine(filme.Titulo);
+
+            // Adicionando o filme no banco
+            _context.Filmes.Add(filme);
+            // Informando que quer realmente executar e salvar a informação no banco
+            _context.SaveChanges();
 
             // CreateAtAction: mostra o status da requisição e onde o recurso foi criado (por meio do Header "Location")
             /* CreateAtAction(
@@ -47,10 +55,10 @@ namespace FilmesAPI.Controllers
         */
         // GET: Verbo HTTP para consultar informação
         [HttpGet]
-        public IActionResult RecuperaFilmes()
+        public IEnumerable<Filme> RecuperaFilmes()
         {
-            // Retorno de status HTTP 200
-            return Ok(filmes);
+            // _context.Filmes acessa todo o conjunto de dados da tabela Filmes
+            return _context.Filmes;
         }
 
         // Método para recuperar um filme especifico
@@ -76,7 +84,7 @@ namespace FilmesAPI.Controllers
             // Opção 2
             
             // Caso não encontre o id, o "default" é o retorno nulo
-            Filme filme = filmes.FirstOrDefault(filme => filme.IdFilme == id);
+            Filme filme = _context.Filmes.FirstOrDefault(filme => filme.IdFilme == id);
 
             if(filme != null)
             {
