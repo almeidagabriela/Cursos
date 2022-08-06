@@ -3,7 +3,6 @@ using FilmesAPI.Data;
 using FilmesAPI.Data.DTOs;
 using FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic; // Reconhece o uso do List
 using System.Linq;
 
@@ -18,11 +17,11 @@ namespace FilmesAPI.Controllers
         /* Utilizando o context criado para comunicação com o banco
             Podemos utiliza-lo para acessar, guardar e recuperar informações no banco
         */
-        private FilmeContext _context;
+        private AppDbContext _context;
         private IMapper _mapper;
 
         // Inicializando o _context via construtor
-        public FilmeController(FilmeContext context, IMapper mapper)
+        public FilmeController(AppDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
