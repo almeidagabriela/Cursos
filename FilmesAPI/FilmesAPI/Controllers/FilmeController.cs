@@ -1,4 +1,5 @@
-﻿using FilmesAPI.Data;
+﻿using AutoMapper;
+using FilmesAPI.Data;
 using FilmesAPI.Data.DTOs;
 using FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +19,13 @@ namespace FilmesAPI.Controllers
             Podemos utiliza-lo para acessar, guardar e recuperar informações no banco
         */
         private FilmeContext _context;
+        private IMapper _mapper;
 
         // Inicializando o _context via construtor
-        public FilmeController(FilmeContext context)
+        public FilmeController(FilmeContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // Definindo o verbo HTTP como "salvar", para identificar o uso do nosso método
@@ -32,14 +35,8 @@ namespace FilmesAPI.Controllers
             // TESTE: Validando o filme que estamos recebendo
             //Console.WriteLine(filme.Titulo);
 
-            // Converte o filmeDTO em um filme (criando objeto com construtor implicito)
-            Filme filme = new Filme
-            {
-                Titulo = filmeDTO.Titulo,
-                Diretor = filmeDTO.Diretor,
-                Genero = filmeDTO.Genero,
-                Duracao = filmeDTO.Duracao
-            };
+            // Converte o filmeDTO em um filme utilizando o AutoMapper
+            Filme filme = _mapper.Map<Filme>(filmeDTO);
 
             // Adicionando o filme no banco
             _context.Filmes.Add(filme);
@@ -98,16 +95,8 @@ namespace FilmesAPI.Controllers
 
             if(filme != null)
             {
-                // Populando o DTO com base no filme recuperado
-                ReadFilmeDto filmeDto = new ReadFilmeDto
-                {
-                    IdFilme = filme.IdFilme,
-                    Titulo = filme.Titulo,
-                    Diretor = filme.Diretor,
-                    Genero = filme.Genero,
-                    Duracao = filme.Duracao,
-                    HoraDaConsulta = DateTime.Now
-                };
+                // Converte o filme para um DTO com o AutoMapper
+                ReadFilmeDto filmeDto = _mapper.Map<ReadFilmeDto>(filme);
 
                 //Retorna dados do filme com status HTTP 200
                 return Ok(filmeDto);
@@ -127,14 +116,12 @@ namespace FilmesAPI.Controllers
             // Caso não encontre o filme
             if(filme == null)
             {
-                return NotFound(); // Retorna um "não encontrado"
+                // Retorna um "não encontrado"
+                return NotFound();
             }
 
-            // Atualização campo a campo (não é a melhor forma)
-            filme.Titulo = filmeDTO.Titulo;
-            filme.Diretor = filmeDTO.Diretor;
-            filme.Genero = filmeDTO.Genero;
-            filme.Duracao = filmeDTO.Duracao;
+            // Sobrescreve o filme com as informações do filmeDTO
+            _mapper.Map(filmeDTO, filme);
 
             // Salvar mudanças
             _context.SaveChanges();
