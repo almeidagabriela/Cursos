@@ -29,7 +29,7 @@ namespace FilmesAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(opts => opts
-                                                    .UseLazyLoadingProxies() // Para carregar propriedades no momento da consulta
+                                                    .UseLazyLoadingProxies() // Para carregar informaçoes, no momento da consulta, de uma entidade que é propriedade de outra
                                                     .UseMySQL(Configuration.GetConnectionString("FilmeConnection")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
