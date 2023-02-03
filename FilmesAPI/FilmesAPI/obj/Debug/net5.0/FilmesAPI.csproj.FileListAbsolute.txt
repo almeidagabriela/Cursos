@@ -97,3 +97,5 @@ C:/Users/Almeida-PC/Documents/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/obj/Deb
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/ZstdNet.dll
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/AutoMapper.dll
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/Castle.Core.dll
+/home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Proxies.dll

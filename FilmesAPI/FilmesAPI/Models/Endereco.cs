@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace FilmesAPI.Models
 {
@@ -10,6 +11,9 @@ namespace FilmesAPI.Models
         public string Logradouro { get; set; }
         public string Bairro { get; set; }
         public int Numero { get; set; }
-        public Cinema Cinema { get; set; }
+
+        // virtual: explicíta que a propriedade é Lazy
+        [JsonIgnore] // Ao consultar um endereço ele vai ignorar a propriedade Cinema
+        public virtual Cinema Cinema { get; set; }
     }
 }
