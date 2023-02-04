@@ -25,7 +25,8 @@ namespace FilmesAPI.Data
             builder.Entity<Cinema>()
                 .HasOne(cinema => cinema.Gerente)
                 .WithMany(gerente => gerente.Cinemas) // O gerente pode ter de zero a muitos cinemas
-                .HasForeignKey(cinema => cinema.GerenteId);
+                .HasForeignKey(cinema => cinema.GerenteId)
+                .OnDelete(DeleteBehavior.Restrict); // Definindo que ao deletar um Gerente a deleção será restrita (o padrão é cascata)
         }
 
         // Propriedade utilizando DbSet (responsavel pelo conjunto de dados para acesso ao banco)
