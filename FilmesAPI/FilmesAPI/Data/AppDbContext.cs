@@ -21,6 +21,11 @@ namespace FilmesAPI.Data
                 .HasOne(endereco => endereco.Cinema) // Determinando que um objeto do tipo endereço possui um cinema
                 .WithOne(cinema => cinema.Endereco) // O cinema possui um endereço
                 .HasForeignKey<Cinema>(cinema => cinema.EnderecoId); // Indicando que a chave estrangeira está na classe cinema pelo campo EnderecoId
+        
+            builder.Entity<Cinema>()
+                .HasOne(cinema => cinema.Gerente)
+                .WithMany(gerente => gerente.Cinemas) // O gerente pode ter de zero a muitos cinemas
+                .HasForeignKey(cinema => cinema.GerenteId);
         }
 
         // Propriedade utilizando DbSet (responsavel pelo conjunto de dados para acesso ao banco)

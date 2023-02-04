@@ -13,5 +13,7 @@ namespace FilmesAPI.Models
         // virtual: explicíta que a propriedade é Lazy Load
         public virtual Endereco Endereco { get; set; }
         public int EnderecoId { get; set; }
+        public virtual Gerente Gerente { get; set; }
+        public int GerenteId { get; set; }
     }
 }
