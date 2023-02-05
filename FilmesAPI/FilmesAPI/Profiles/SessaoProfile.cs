@@ -10,7 +10,12 @@ namespace FilmesAPI.Profiles
         {
             // Mapper <De, Para>
             CreateMap<CreateSessaoDto, Sessao>();
-            CreateMap<Sessao, ReadSessaoDto>();
+            CreateMap<Sessao, ReadSessaoDto>()
+                // Calculando o horário de inicio da sessão em tempo de execução
+                .ForMember(dto => dto.HorarioDeInicio, opts => opts
+                    // Subtraindo a duração do horário de encerramento, obtendo então o horário de inicio.
+                    .MapFrom(dto => dto.HorarioDeEncerramento.AddMinutes(dto.Filme.Duracao*(-1)))
+                );
         }
     }
 }
