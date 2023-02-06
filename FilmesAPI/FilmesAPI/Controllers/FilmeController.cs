@@ -52,19 +52,32 @@ namespace FilmesAPI.Controllers
             return CreatedAtAction(nameof(RecuperaFilmesPorId), new {Id = filme.IdFilme}, filme);
         }
 
-        // Método para recuparar os filmes que foram cadastrados
-        /* 
-            Utilizando o IEnumerable nós garantimos que se 
-            caso mudarmos o retorno (lista de filmes), 
-            o método não vai quebrar:
-            public IEnumerable<Filme> RecuperaFilmes()
-        */
+        // int? nomeDaVariavel = null - estamos informando com o "?" que o campo é nulável, ou seja, tem a possíbilidade de ser nulo 
         // GET: Verbo HTTP para consultar informação
         [HttpGet]
-        public IEnumerable<Filme> RecuperaFilmes()
-        {
-            // _context.Filmes acessa todo o conjunto de dados da tabela Filmes
-            return _context.Filmes;
+        public IActionResult RecuperaFilmes([FromQuery] int? classificacaoEtaria = null)
+        {   
+            List<Filme> filmes;
+
+            if(classificacaoEtaria == null)
+            {
+                // Retorna a lista completa de filmes
+                filmes = _context.Filmes.ToList();
+            }
+            else
+            {
+                // Filtrando filmes com classificação etária menor ou igual ao que foi passado no queryParameter
+                filmes = _context
+                .Filmes.Where(filme => filme.ClassificacaoEtaria <= classificacaoEtaria).ToList();
+            }
+
+            if(filmes != null)
+            {
+                List<ReadFilmeDto> readDto = _mapper.Map<List<ReadFilmeDto>>(filmes);
+                return Ok(readDto);
+            }
+
+            return NotFound();
         }
 
         // Método para recuperar um filme especifico
