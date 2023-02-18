@@ -1,4 +1,5 @@
 using FilmesAPI.Data;
+using FilmesAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,8 @@ namespace FilmesAPI
             services.AddDbContext<AppDbContext>(opts => opts
                                                     .UseLazyLoadingProxies() // Para carregar informaçoes, no momento da consulta, de uma entidade que é propriedade de outra
                                                     .UseMySQL(Configuration.GetConnectionString("FilmeConnection")));
+            services.AddScoped<FilmeService, FilmeService>();
+            services.AddScoped<CinemaService, CinemaService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

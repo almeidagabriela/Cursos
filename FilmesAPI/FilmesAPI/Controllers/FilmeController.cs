@@ -2,6 +2,8 @@
 using FilmesAPI.Data;
 using FilmesAPI.Data.DTOs;
 using FilmesAPI.Models;
+using FilmesAPI.Services;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic; // Reconhece o uso do List
 using System.Linq;
@@ -14,68 +16,32 @@ namespace FilmesAPI.Controllers
     [Route("[controller]")]
     public class FilmeController : ControllerBase
     {
-        /* Utilizando o context criado para comunicação com o banco
-            Podemos utiliza-lo para acessar, guardar e recuperar informações no banco
-        */
-        private AppDbContext _context;
-        private IMapper _mapper;
+        // Referência do serviço de comunicação com o banco
+        private FilmeService _filmeService;
 
         // Inicializando o _context via construtor
-        public FilmeController(AppDbContext context, IMapper mapper)
+        public FilmeController(FilmeService filmeService)
         {
-            _context = context;
-            _mapper = mapper;
+            _filmeService = filmeService;
         }
 
         // Definindo o verbo HTTP como "salvar", para identificar o uso do nosso método
         [HttpPost]
         public IActionResult AdicionaFilme([FromBody] CreateFilmeDto filmeDTO) // "FromBody" indica que esperamos o parametro através do corpo da requisição
         {
-            // TESTE: Validando o filme que estamos recebendo
-            //Console.WriteLine(filme.Titulo);
+            ReadFilmeDto readDto = _filmeService.AdicionaFilme(filmeDTO);
 
-            // Converte o filmeDTO em um filme utilizando o AutoMapper
-            Filme filme = _mapper.Map<Filme>(filmeDTO);
-
-            // Adicionando o filme no banco
-            _context.Filmes.Add(filme);
-            // Informando que quer realmente executar e salvar a informação no banco
-            _context.SaveChanges();
-
-            // CreateAtAction: mostra o status da requisição e onde o recurso foi criado (por meio do Header "Location")
-            /* CreateAtAction(
-                    nameof(Ação que precisa ser executada para recuperar o recurso),
-                    new {Valores que queremos passar na rota referenciada acima},
-                    objeto/valor que estamos tratando
-                )
-            */
-            return CreatedAtAction(nameof(RecuperaFilmesPorId), new {Id = filme.IdFilme}, filme);
+            return CreatedAtAction(nameof(RecuperaFilmesPorId), new {Id = readDto.IdFilme}, readDto);
         }
 
-        // int? nomeDaVariavel = null - estamos informando com o "?" que o campo é nulável, ou seja, tem a possíbilidade de ser nulo 
         // GET: Verbo HTTP para consultar informação
         [HttpGet]
         public IActionResult RecuperaFilmes([FromQuery] int? classificacaoEtaria = null)
         {   
-            List<Filme> filmes;
-
-            if(classificacaoEtaria == null)
-            {
-                // Retorna a lista completa de filmes
-                filmes = _context.Filmes.ToList();
-            }
-            else
-            {
-                // Filtrando filmes com classificação etária menor ou igual ao que foi passado no queryParameter
-                filmes = _context
-                .Filmes.Where(filme => filme.ClassificacaoEtaria <= classificacaoEtaria).ToList();
-            }
-
-            if(filmes != null)
-            {
-                List<ReadFilmeDto> readDto = _mapper.Map<List<ReadFilmeDto>>(filmes);
-                return Ok(readDto);
-            }
+            List<ReadFilmeDto> readDto =  _filmeService.RecuperaFilmes(classificacaoEtaria);
+            
+            // Se encontrou algum filme
+            if(readDto != null) return Ok(readDto);
 
             return NotFound();
         }
@@ -86,34 +52,11 @@ namespace FilmesAPI.Controllers
         // IActionResult é o tipo de retorno que utilizamos para resultados de status HTTP
         public IActionResult RecuperaFilmesPorId(int id)
         {
-            // Opção 1
+            ReadFilmeDto readDto = _filmeService.RecuperaFilmesPorId(id);
 
-            // // Para cada filme da lista
-            // foreach(Filme filme in filmes) 
-            // {
-            //     // Verifica se o id do filme é igual ao passado por parametro
-            //     if(filme.IdFilme == id)
-            //     {
-            //         return filme;
-            //     }
-            // }
-
-            // return null;
-
-            // Opção 2
+            // Se encontrou o filme
+            if(readDto != null) return Ok(readDto);
             
-            // Caso não encontre o id, o "default" é o retorno nulo
-            Filme filme = _context.Filmes.FirstOrDefault(filme => filme.IdFilme == id);
-
-            if(filme != null)
-            {
-                // Converte o filme para um DTO com o AutoMapper
-                ReadFilmeDto filmeDto = _mapper.Map<ReadFilmeDto>(filme);
-
-                //Retorna dados do filme com status HTTP 200
-                return Ok(filmeDto);
-            }
-
             //Caso não tenha encontrado o filme, o retorno será o status HTTP 404
             return NotFound();
         }
@@ -122,22 +65,11 @@ namespace FilmesAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult AtualizaFilme(int id, [FromBody] UpdateFilmeDto filmeDTO)
         {
-            // Recuperando os dados do filme pelo ID
-            Filme filme = _context.Filmes.FirstOrDefault(filme => filme.IdFilme == id);
+            Result resultado = _filmeService.AtualizaFilme(id, filmeDTO);
 
-            // Caso não encontre o filme
-            if(filme == null)
-            {
-                // Retorna um "não encontrado"
-                return NotFound();
-            }
+            // Caso o resultado tenha falhado
+            if(resultado.IsFailed) return NotFound();
 
-            // Sobrescreve o filme com as informações do filmeDTO
-            _mapper.Map(filmeDTO, filme);
-
-            // Salvar mudanças
-            _context.SaveChanges();
-            // Ao realizar o retorno de um put, não retornamos nenhum conteúdo
             return NoContent();
         }
 
@@ -145,20 +77,11 @@ namespace FilmesAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeletaFilme(int id)
         {
-            // Recuperando os dados do filme pelo ID
-            Filme filme = _context.Filmes.FirstOrDefault(filme => filme.IdFilme == id);
+            Result resultado = _filmeService.DeletaFilme(id);
 
-            // Caso não encontre o filme
-            if(filme == null)
-            {
-                return NotFound(); // Retorna um "não encontrado"
-            }
+            // Caso o resultado tenha falhado
+            if(resultado.IsFailed) return NotFound();
 
-            // Removendo filme
-            _context.Remove(filme);
-            _context.SaveChanges();
-
-            // Ao realizar o retorno de um delete, não retornamos nenhum conteúdo
             return NoContent();
         }
     }
