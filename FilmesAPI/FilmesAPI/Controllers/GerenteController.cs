@@ -29,6 +29,16 @@ namespace FilmesAPI.Controllers
             return CreatedAtAction(nameof(RecuperaGerentesPorId), new {Id = readDTO.Id}, readDTO);
         }
 
+        [HttpGet]
+        public IActionResult RecuperaGerentes()
+        {
+            List<ReadGerenteDto> readDTO = _gerenteService.RecuperaGerentes();
+
+            if(readDTO != null) return Ok(readDTO);
+
+            return NotFound();
+        }
+
         [HttpGet("{id}")]
         public IActionResult RecuperaGerentesPorId(int id)
         {
@@ -37,6 +47,16 @@ namespace FilmesAPI.Controllers
             if(readDTO != null) return Ok(readDTO);
 
             return NotFound();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult AtualizaGerente(int id, [FromBody] UpdateGerenteDto gerenteDto)
+        {
+            Result resultado = _gerenteService.AtualizaGerente(id, gerenteDto);
+
+            if(resultado.IsFailed) return NotFound();
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

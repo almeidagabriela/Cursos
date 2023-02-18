@@ -43,6 +43,30 @@ namespace FilmesAPI.Services
             return null;
         }
 
+        public List<ReadGerenteDto> RecuperaGerentes()
+        {
+            List<Gerente> gerentes = _context.Gerentes.ToList();
+
+            if(gerentes == null) return null;
+
+            return _mapper.Map<List<ReadGerenteDto>>(gerentes);
+        }
+
+        public Result AtualizaGerente(int id, UpdateGerenteDto gerenteDto)
+        {
+            Gerente gerente = _context.Gerentes.FirstOrDefault(gerente => gerente.Id == id);
+
+            if(gerente == null)
+            {
+                return Result.Fail("Gerente não encontrado");
+            }
+
+            _mapper.Map(gerenteDto, gerente);
+            _context.SaveChanges();
+
+            return Result.Ok();
+        }
+
         public Result DeletaGerente(int id)
         {
             Gerente gerente = _context.Gerentes.FirstOrDefault(gerente => gerente.Id == id);

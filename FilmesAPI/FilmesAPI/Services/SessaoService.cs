@@ -29,7 +29,7 @@ namespace FilmesAPI.Services
             return _mapper.Map<ReadSessaoDto>(sessao);
         }
 
-        internal ReadSessaoDto RecuperaSessoesPorId(int id)
+        public ReadSessaoDto RecuperaSessoesPorId(int id)
         {
             Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
 
@@ -40,6 +40,39 @@ namespace FilmesAPI.Services
             }
 
             return null;
+        }
+
+        public List<ReadSessaoDto> RecuperaSessoes()
+        {
+            List<Sessao> sessoes = _context.Sessoes.ToList();
+
+            if(sessoes == null) return null;
+
+            return _mapper.Map<List<ReadSessaoDto>>(sessoes);
+        }
+
+        public Result AtualizaSessao(int id, UpdateSessaoDto sessaoDto)
+        {
+            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
+
+            if(sessao == null) return Result.Fail("Sessão não encontrada");
+
+            _mapper.Map(sessaoDto, sessao);
+            _context.SaveChanges();
+
+            return Result.Ok();
+        }
+
+        public Result DeletaSessao(int id)
+        {
+            Sessao sessao = _context.Sessoes.FirstOrDefault(sessao => sessao.Id == id);
+
+            if(sessao == null) return Result.Fail("Sessão não encontrada");
+
+            _context.Remove(sessao);
+            _context.SaveChanges();
+
+            return Result.Ok();
         }
     }
 }

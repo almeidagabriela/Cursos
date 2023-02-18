@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using FilmesAPI.Data;
 using FilmesAPI.Data.DTOs;
 using FilmesAPI.Models;
 using FilmesAPI.Services;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FilmesAPI.Controllers
@@ -27,6 +29,16 @@ namespace FilmesAPI.Controllers
             return CreatedAtAction(nameof(RecuperaSessoesPorId), new {Id = readDTO.Id}, readDTO);
         }
 
+        [HttpGet]
+        public IActionResult RecuperaSessoes()
+        {
+            List<ReadSessaoDto> readDTO = _sessaoService.RecuperaSessoes();
+
+            if(readDTO != null) return Ok(readDTO);
+
+            return NotFound();
+        }
+
         [HttpGet("{id}")]
         public IActionResult RecuperaSessoesPorId(int id)
         {
@@ -35,6 +47,26 @@ namespace FilmesAPI.Controllers
             if(readDTO != null) return Ok(readDTO);
 
             return NotFound();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult AtualizaSessao(int id, [FromBody] UpdateSessaoDto sessaoDto)
+        {
+            Result resultado = _sessaoService.AtualizaSessao(id, sessaoDto);
+
+            if(resultado.IsFailed) return NotFound();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeletaSessao(int id)
+        {
+            Result resultado = _sessaoService.DeletaSessao(id);
+
+            if(resultado.IsFailed) return NotFound();
+
+            return NoContent();
         }
     }
 }

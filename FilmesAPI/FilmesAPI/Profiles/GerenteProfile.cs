@@ -22,6 +22,8 @@ namespace FilmesAPI.Profiles
                         (c => new {c.Id, c.Nome, c.Endereco, c.EnderecoId})
                     )
                 );
+
+            CreateMap<UpdateGerenteDto, Gerente>();
         }
     }
 }
