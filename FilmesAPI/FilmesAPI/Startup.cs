@@ -34,6 +34,9 @@ namespace FilmesAPI
                                                     .UseMySQL(Configuration.GetConnectionString("FilmeConnection")));
             services.AddScoped<FilmeService, FilmeService>();
             services.AddScoped<CinemaService, CinemaService>();
+            services.AddScoped<EnderecoService, EnderecoService>();
+            services.AddScoped<GerenteService, GerenteService>();
+            services.AddScoped<SessaoService, SessaoService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
