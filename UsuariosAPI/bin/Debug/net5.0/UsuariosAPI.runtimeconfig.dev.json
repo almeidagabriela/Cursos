@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/home/galmeida/.dotnet/store/|arch|/|tfm|",
+      "/home/galmeida/.nuget/packages"
+    ]
+  }
+}
