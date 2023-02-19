@@ -22,9 +22,9 @@ namespace UsuariosAPI.Controllers
             Result resultado = _loginService.LogarUsuario(request);
 
             // Se a requisição falhou, o login não foi autorizado
-            if(resultado.IsFailed) return Unauthorized();
+            if(resultado.IsFailed) return Unauthorized(resultado.Errors);
 
-            return Ok();
+            return Ok(resultado.Successes);
         }
     }
 }

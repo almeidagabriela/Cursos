@@ -55,3 +55,7 @@
 /home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/obj/Debug/net5.0/UsuariosAPI.genruntimeconfig.cache
 /home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/obj/Debug/net5.0/ref/UsuariosAPI.dll
 /home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/bin/Debug/net5.0/FluentResults.dll
+/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/bin/Debug/net5.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/bin/Debug/net5.0/Microsoft.IdentityModel.Logging.dll
+/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/bin/Debug/net5.0/Microsoft.IdentityModel.Tokens.dll
+/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/bin/Debug/net5.0/System.IdentityModel.Tokens.Jwt.dll
