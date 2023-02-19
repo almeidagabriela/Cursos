@@ -39,6 +39,7 @@ namespace UsuariosAPI
                 .AddEntityFrameworkStores<UserDbContext>(); // Definindo o que utilizaremos para armazenar os dados utilizados para identificação
 
             services.AddScoped<CadastroService, CadastroService>();
+            services.AddScoped<LoginService, LoginService>();
             services.AddControllers();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
