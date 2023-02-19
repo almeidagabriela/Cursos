@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "v6FEr3rjzHsTtx1BqfCPo+aoSRrRQEeP3WjB4l/BU3xaaY5M2e2Fdg2RT8ObDSXU5u9nfANDO+IIzwiF0slDJw==",
+  "dgSpecHash": "5hXBaCbm/Y7nUjgDa1XdVqOnkx/BRiexYh/1YSWjRmLDYvgOuHd5lb5y35OySiM3iKVnQmxdZeMclWQ4xDMlgA==",
   "success": true,
   "projectFilePath": "/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/UsuariosAPI.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "/home/galmeida/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/8.1.1/automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "/home/galmeida/.nuget/packages/bouncycastle.netcore/1.8.5/bouncycastle.netcore.1.8.5.nupkg.sha512",
     "/home/galmeida/.nuget/packages/castle.core/4.4.1/castle.core.4.4.1.nupkg.sha512",
+    "/home/galmeida/.nuget/packages/fluentresults/2.5.0/fluentresults.2.5.0.nupkg.sha512",
     "/home/galmeida/.nuget/packages/google.protobuf/3.19.4/google.protobuf.3.19.4.nupkg.sha512",
     "/home/galmeida/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/home/galmeida/.nuget/packages/k4os.compression.lz4/1.2.6/k4os.compression.lz4.1.2.6.nupkg.sha512",
