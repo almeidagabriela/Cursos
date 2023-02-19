@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5hXBaCbm/Y7nUjgDa1XdVqOnkx/BRiexYh/1YSWjRmLDYvgOuHd5lb5y35OySiM3iKVnQmxdZeMclWQ4xDMlgA==",
+  "dgSpecHash": "D+TpAMCYv84nWTZWDqKRs9fmDOR2ehRILgwvyXvK3TRnFClp4PBXRQR+0fFhlBBaGJ2g8cjAVNVfAo9LUHqhcQ==",
   "success": true,
   "projectFilePath": "/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/UsuariosAPI.csproj",
   "expectedPackageFiles": [
@@ -55,6 +55,9 @@
     "/home/galmeida/.nuget/packages/microsoft.extensions.options/5.0.0/microsoft.extensions.options.5.0.0.nupkg.sha512",
     "/home/galmeida/.nuget/packages/microsoft.extensions.primitives/5.0.0/microsoft.extensions.primitives.5.0.0.nupkg.sha512",
     "/home/galmeida/.nuget/packages/microsoft.extensions.webencoders/2.2.0/microsoft.extensions.webencoders.2.2.0.nupkg.sha512",
+    "/home/galmeida/.nuget/packages/microsoft.identitymodel.jsonwebtokens/6.12.0/microsoft.identitymodel.jsonwebtokens.6.12.0.nupkg.sha512",
+    "/home/galmeida/.nuget/packages/microsoft.identitymodel.logging/6.12.0/microsoft.identitymodel.logging.6.12.0.nupkg.sha512",
+    "/home/galmeida/.nuget/packages/microsoft.identitymodel.tokens/6.12.0/microsoft.identitymodel.tokens.6.12.0.nupkg.sha512",
     "/home/galmeida/.nuget/packages/microsoft.net.http.headers/2.2.0/microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "/home/galmeida/.nuget/packages/microsoft.netcore.platforms/3.1.0/microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "/home/galmeida/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
@@ -108,6 +111,7 @@
     "/home/galmeida/.nuget/packages/system.globalization/4.3.0/system.globalization.4.3.0.nupkg.sha512",
     "/home/galmeida/.nuget/packages/system.globalization.calendars/4.3.0/system.globalization.calendars.4.3.0.nupkg.sha512",
     "/home/galmeida/.nuget/packages/system.globalization.extensions/4.3.0/system.globalization.extensions.4.3.0.nupkg.sha512",
+    "/home/galmeida/.nuget/packages/system.identitymodel.tokens.jwt/6.12.0/system.identitymodel.tokens.jwt.6.12.0.nupkg.sha512",
     "/home/galmeida/.nuget/packages/system.io/4.3.0/system.io.4.3.0.nupkg.sha512",
     "/home/galmeida/.nuget/packages/system.io.compression/4.3.0/system.io.compression.4.3.0.nupkg.sha512",
     "/home/galmeida/.nuget/packages/system.io.compression.zipfile/4.3.0/system.io.compression.zipfile.4.3.0.nupkg.sha512",
