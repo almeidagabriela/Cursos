@@ -38,7 +38,8 @@ namespace UsuariosAPI
             services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
                     opt => opt.SignIn.RequireConfirmedEmail = true // Definindo a confirmação de email como obrigatória
                 )
-                .AddEntityFrameworkStores<UserDbContext>(); // Definindo o que utilizaremos para armazenar os dados utilizados para identificação
+                .AddEntityFrameworkStores<UserDbContext>() // Definindo o que utilizaremos para armazenar os dados utilizados para identificação
+                .AddDefaultTokenProviders(); // Definindo a utilização do gerador de token do Identity
 
             services.AddScoped<CadastroService, CadastroService>();
             services.AddScoped<LoginService, LoginService>();

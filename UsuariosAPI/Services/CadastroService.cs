@@ -28,9 +28,16 @@ namespace UsuariosAPI.Services
             IdentityUser<int> usuarioIdentity = _mapper.Map<IdentityUser<int>>(usuario);
 
             // Criar usuário de maneira assincrona
-            Task<IdentityResult> resultadoIdentity = _userManager.CreateAsync(usuarioIdentity, createDTO.Password);
+            Task<IdentityResult> resultadoIdentity = _userManager
+                .CreateAsync(usuarioIdentity, createDTO.Password);
 
-            if(resultadoIdentity.Result.Succeeded) return Result.Ok();
+            if(resultadoIdentity.Result.Succeeded)
+            {
+                // Gerar token de ativação de conta utilizando o Identity
+                var code = _userManager.GenerateEmailConfirmationTokenAsync(usuarioIdentity).Result;
+
+                return Result.Ok().WithSuccess(code);
+            }
 
             return Result.Fail("Falha ao cadastrar usuário");
         }
