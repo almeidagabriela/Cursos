@@ -35,7 +35,9 @@ namespace UsuariosAPI
                 options.UseMySQL(Configuration.GetConnectionString("UsuarioConnection"))
             );
             // Definindo uso do Identity
-            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
+            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
+                    opt => opt.SignIn.RequireConfirmedEmail = true // Definindo a confirmação de email como obrigatória
+                )
                 .AddEntityFrameworkStores<UserDbContext>(); // Definindo o que utilizaremos para armazenar os dados utilizados para identificação
 
             services.AddScoped<CadastroService, CadastroService>();
