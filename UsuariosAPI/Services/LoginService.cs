@@ -46,5 +46,25 @@ namespace UsuariosAPI.Services
 
             return Result.Fail("Login falhou");
         }
+
+        public Result SolicitaResetSenhaUsuario(SolicitaResetRequest request)
+        {
+            // Recuperando usuário a partir do email
+            IdentityUser<int> identityUser = _signInManager
+                .UserManager
+                    .Users
+                        .FirstOrDefault(user => user.NormalizedEmail == request.Email.ToUpper());
+            
+            if(identityUser != null)
+            {
+                // Gera um token para redefinição de senha
+                string codigoDeRecuperacao = _signInManager
+                    .UserManager.GeneratePasswordResetTokenAsync(identityUser).Result;
+
+                return Result.Ok().WithSuccess(codigoDeRecuperacao);
+            }
+
+            return Result.Fail("Falha ao solicitar redefinição");
+        }
     }
 }
