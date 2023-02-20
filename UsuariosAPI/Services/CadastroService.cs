@@ -14,11 +14,13 @@ namespace UsuariosAPI.Services
     {
         private IMapper _mapper;
         private UserManager<IdentityUser<int>> _userManager;
+        private EmailService _emailService;
 
-        public CadastroService(IMapper mapper, UserManager<IdentityUser<int>>  userManager)
+        public CadastroService(IMapper mapper, UserManager<IdentityUser<int>> userManager, EmailService emailService)
         {
             _mapper = mapper;
             _userManager = userManager;
+            _emailService = emailService;
         }
 
         public Result CadastraUsuario(CreateUsuarioDto createDTO)
@@ -37,6 +39,14 @@ namespace UsuariosAPI.Services
             {
                 // Gerar token de ativação de conta utilizando o Identity
                 var code = _userManager.GenerateEmailConfirmationTokenAsync(usuarioIdentity).Result;
+
+                // Enviar email de confirmação ao usuário
+                _emailService.EnviarEmail(
+                    new[] { usuarioIdentity.Email }, // Lista de destinatarios
+                    "Ativação de conta", // Assunto
+                    usuarioIdentity.Id,
+                    code
+                );
 
                 return Result.Ok().WithSuccess(code);
             }
