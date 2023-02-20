@@ -59,3 +59,5 @@
 /home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/bin/Debug/net5.0/Microsoft.IdentityModel.Logging.dll
 /home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/bin/Debug/net5.0/Microsoft.IdentityModel.Tokens.dll
 /home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/bin/Debug/net5.0/System.IdentityModel.Tokens.Jwt.dll
+/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/bin/Debug/net5.0/MailKit.dll
+/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/bin/Debug/net5.0/MimeKit.dll

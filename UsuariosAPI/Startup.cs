@@ -41,6 +41,7 @@ namespace UsuariosAPI
                 .AddEntityFrameworkStores<UserDbContext>() // Definindo o que utilizaremos para armazenar os dados utilizados para identificação
                 .AddDefaultTokenProviders(); // Definindo a utilização do gerador de token do Identity
 
+            services.AddScoped<EmailService, EmailService>();
             services.AddScoped<CadastroService, CadastroService>();
             services.AddScoped<LoginService, LoginService>();
             services.AddScoped<LogoutService, LogoutService>();

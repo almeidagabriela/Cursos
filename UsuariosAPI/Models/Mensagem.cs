@@ -16,10 +16,10 @@ namespace UsuariosAPI.Models
             Destinatario = new List<MailboxAddress>();
             
             // Adiciona os destinatarios
-            Destinatario.AddRange(destinatarios.Select(destinatario => new MailboxAddress(destinatario)));
+            Destinatario.AddRange(destinatarios.Select(destinatario => new MailboxAddress(string.Empty, destinatario)));
 
             Assunto = assunto;
-            Conteudo = $"http://localhost:6000/ativa?UsuarioId={usuarioId}&CodigoDeAtivacao={codigo}";
+            Conteudo = $"http://localhost:6000/ativar?UsuarioId={usuarioId}&CodigoDeAtivacao={codigo}";
         }
     }
 }

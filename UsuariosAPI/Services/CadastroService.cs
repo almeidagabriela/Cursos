@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using AutoMapper;
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
@@ -39,13 +40,14 @@ namespace UsuariosAPI.Services
             {
                 // Gerar token de ativação de conta utilizando o Identity
                 var code = _userManager.GenerateEmailConfirmationTokenAsync(usuarioIdentity).Result;
+                var encondedCode = HttpUtility.UrlEncode(code);
 
                 // Enviar email de confirmação ao usuário
                 _emailService.EnviarEmail(
                     new[] { usuarioIdentity.Email }, // Lista de destinatarios
                     "Ativação de conta", // Assunto
                     usuarioIdentity.Id,
-                    code
+                    encondedCode
                 );
 
                 return Result.Ok().WithSuccess(code);
