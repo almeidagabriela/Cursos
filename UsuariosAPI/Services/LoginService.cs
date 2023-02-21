@@ -39,7 +39,11 @@ namespace UsuariosAPI.Services
                                 usuario.NormalizedUserName == request.Username.ToUpper());
 
                 // Gerando token
-                Token token = _tokenService.CreateToken(identityUser);
+                Token token = _tokenService
+                    .CreateToken(
+                        identityUser,
+                        _signInManager.UserManager.GetRolesAsync(identityUser).Result.FirstOrDefault() // Inclui informação da Role do usuário
+                    );
 
                 return Result.Ok().WithSuccess(token.Value); // Retorno OK com token
             }

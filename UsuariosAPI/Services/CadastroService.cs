@@ -15,13 +15,15 @@ namespace UsuariosAPI.Services
     {
         private IMapper _mapper;
         private UserManager<IdentityUser<int>> _userManager;
+        private RoleManager<IdentityRole<int>> _roleManager;
         private EmailService _emailService;
 
-        public CadastroService(IMapper mapper, UserManager<IdentityUser<int>> userManager, EmailService emailService)
+        public CadastroService(IMapper mapper, UserManager<IdentityUser<int>> userManager, EmailService emailService, RoleManager<IdentityRole<int>> roleManager = null)
         {
             _mapper = mapper;
             _userManager = userManager;
             _emailService = emailService;
+            _roleManager = roleManager;
         }
 
         public Result CadastraUsuario(CreateUsuarioDto createDTO)
@@ -38,6 +40,12 @@ namespace UsuariosAPI.Services
 
             if(resultadoIdentity.Result.Succeeded)
             {
+                // Criando uma Role
+                var createRoleResult = _roleManager.CreateAsync(new IdentityRole<int>("admin")).Result;
+
+                // Adicionando o usuário à uma Role
+                var usuarioRoleResult = _userManager.AddToRoleAsync(usuarioIdentity, "admin").Result;
+
                 // Gerar token de ativação de conta utilizando o Identity
                 var code = _userManager.GenerateEmailConfirmationTokenAsync(usuarioIdentity).Result;
                 var encondedCode = HttpUtility.UrlEncode(code);
