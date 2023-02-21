@@ -76,7 +76,6 @@ C:/Users/Almeida-PC/Documents/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/obj/Deb
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/MySql.Data.dll
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/Ubiety.Dns.Core.dll
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/MySql.EntityFrameworkCore.dll
-/home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/Newtonsoft.Json.dll
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/System.Configuration.ConfigurationManager.dll
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/System.Diagnostics.DiagnosticSource.dll
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/System.IdentityModel.Tokens.Jwt.dll
@@ -100,3 +99,6 @@ C:/Users/Almeida-PC/Documents/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/obj/Deb
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/Castle.Core.dll
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/Microsoft.EntityFrameworkCore.Proxies.dll
 /home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/FluentResults.dll
+/home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/Microsoft.AspNetCore.Authorization.dll
+/home/galmeida/Desenvolvimento/Cursos/FilmesAPI/FilmesAPI/bin/Debug/net5.0/Microsoft.AspNetCore.Metadata.dll

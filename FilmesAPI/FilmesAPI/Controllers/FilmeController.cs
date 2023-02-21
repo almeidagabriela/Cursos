@@ -4,6 +4,7 @@ using FilmesAPI.Data.DTOs;
 using FilmesAPI.Models;
 using FilmesAPI.Services;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic; // Reconhece o uso do List
 using System.Linq;
@@ -25,8 +26,9 @@ namespace FilmesAPI.Controllers
             _filmeService = filmeService;
         }
 
-        // Definindo o verbo HTTP como "salvar", para identificar o uso do nosso método
+        // Somente usuário com a Role "admin" tem permissão para adicionar um filme
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult AdicionaFilme([FromBody] CreateFilmeDto filmeDTO) // "FromBody" indica que esperamos o parametro através do corpo da requisição
         {
             ReadFilmeDto readDto = _filmeService.AdicionaFilme(filmeDTO);

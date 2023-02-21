@@ -1,5 +1,6 @@
 using FilmesAPI.Data;
 using FilmesAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,10 +10,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FilmesAPI
@@ -32,6 +35,29 @@ namespace FilmesAPI
             services.AddDbContext<AppDbContext>(opts => opts
                                                     .UseLazyLoadingProxies() // Para carregar informaçoes, no momento da consulta, de uma entidade que é propriedade de outra
                                                     .UseMySQL(Configuration.GetConnectionString("FilmeConnection")));
+            
+            // Definindo a exigência de autenticação
+            services.AddAuthentication(auth =>
+                {
+                    auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; // Provando que o token realmente é autêntico
+                }    
+            )
+            .AddJwtBearer(token =>
+                {
+                    token.RequireHttpsMetadata = false;
+                    token.SaveToken = true; // Armazena o token nas propriedades de autenticação da aplicação
+                    token.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true, // Validar quem enviou o token
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("0asdjas09djsa09djasdjsadajs09asjd09sajcnzxn")),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ClockSkew = TimeSpan.Zero
+                    };
+                }
+            );
+
             services.AddScoped<FilmeService, FilmeService>();
             services.AddScoped<CinemaService, CinemaService>();
             services.AddScoped<EnderecoService, EnderecoService>();
@@ -59,6 +85,8 @@ namespace FilmesAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
