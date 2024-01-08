@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "/home/galmeida/.dotnet/store/|arch|/|tfm|",
-      "/home/galmeida/.nuget/packages"
+      "C:\\Users\\Gabi\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Gabi\\.nuget\\packages"
     ]
   }
 }

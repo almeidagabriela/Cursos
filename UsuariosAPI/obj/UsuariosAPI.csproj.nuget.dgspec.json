@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/UsuariosAPI.csproj": {}
+    "C:\\git\\Cursos\\UsuariosAPI\\UsuariosAPI.csproj": {}
   },
   "projects": {
-    "/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/UsuariosAPI.csproj": {
+    "C:\\git\\Cursos\\UsuariosAPI\\UsuariosAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/UsuariosAPI.csproj",
+        "projectUniqueName": "C:\\git\\Cursos\\UsuariosAPI\\UsuariosAPI.csproj",
         "projectName": "UsuariosAPI",
-        "projectPath": "/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/UsuariosAPI.csproj",
-        "packagesPath": "/home/galmeida/.nuget/packages/",
-        "outputPath": "/home/galmeida/Desenvolvimento/Cursos/UsuariosAPI/obj/",
+        "projectPath": "C:\\git\\Cursos\\UsuariosAPI\\UsuariosAPI.csproj",
+        "packagesPath": "C:\\Users\\Gabi\\.nuget\\packages\\",
+        "outputPath": "C:\\git\\Cursos\\UsuariosAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/galmeida/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Gabi\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -99,7 +99,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -111,7 +112,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.302/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
