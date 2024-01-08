@@ -40,6 +40,9 @@ namespace UsuariosAPI.Services
 
             if(resultadoIdentity.Result.Succeeded)
             {
+                // Definindo a role padrão para novos usuários
+                _userManager.AddToRoleAsync(usuarioIdentity, "regular");
+
                 // Gerar token de ativação de conta utilizando o Identity 
                 var code = _userManager.GenerateEmailConfirmationTokenAsync(usuarioIdentity).Result;
                 var encondedCode = HttpUtility.UrlEncode(code);

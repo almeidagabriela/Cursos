@@ -46,12 +46,22 @@ namespace UsuariosAPI.Data
 
             builder.Entity<IdentityUser<int>>().HasData(admin);
 
+            // Criando Roles
             builder.Entity<IdentityRole<int>>().HasData(
                 new IdentityRole<int> 
                 {
                     Id = 99999,
                     Name = "admin",
                     NormalizedName = "ADMIN"
+                }
+            );
+
+            builder.Entity<IdentityRole<int>>().HasData(
+                new IdentityRole<int> 
+                {
+                    Id = 99998,
+                    Name = "regular",
+                    NormalizedName = "REGULAR"
                 }
             );
 
