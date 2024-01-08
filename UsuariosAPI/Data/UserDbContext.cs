@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace UsuariosAPI.Data
 {
@@ -13,9 +14,11 @@ namespace UsuariosAPI.Data
     */
     public class UserDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>
     {
-        public UserDbContext(DbContextOptions<UserDbContext> opt) : base(opt)
+        private IConfiguration _configuration;
+
+        public UserDbContext(DbContextOptions<UserDbContext> opt, IConfiguration configuration) : base(opt)
         {
-            
+            _configuration = configuration;
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -36,7 +39,10 @@ namespace UsuariosAPI.Data
 
             PasswordHasher<IdentityUser<int>> hasher = new PasswordHasher<IdentityUser<int>>();
 
-            admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
+            admin.PasswordHash = hasher.HashPassword(
+                admin, 
+                _configuration.GetValue<string>("admininfo:password")
+            );
 
             builder.Entity<IdentityUser<int>>().HasData(admin);
 
