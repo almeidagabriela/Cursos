@@ -40,13 +40,7 @@ namespace UsuariosAPI.Services
 
             if(resultadoIdentity.Result.Succeeded)
             {
-                // Criando uma Role
-                var createRoleResult = _roleManager.CreateAsync(new IdentityRole<int>("admin")).Result;
-
-                // Adicionando o usuário à uma Role
-                var usuarioRoleResult = _userManager.AddToRoleAsync(usuarioIdentity, "admin").Result;
-
-                // Gerar token de ativação de conta utilizando o Identity
+                // Gerar token de ativação de conta utilizando o Identity 
                 var code = _userManager.GenerateEmailConfirmationTokenAsync(usuarioIdentity).Result;
                 var encondedCode = HttpUtility.UrlEncode(code);
 
