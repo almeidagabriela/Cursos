@@ -1,6 +1,8 @@
+using FilmesAPI.Authorization;
 using FilmesAPI.Data;
 using FilmesAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -57,6 +59,18 @@ namespace FilmesAPI
                     };
                 }
             );
+
+            // Incluindo politicas de autorização customizadas
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IdadeMinima", policy => 
+                {
+                    // Incluindo requisito de idade minima igual a 18 anos
+                    policy.Requirements.Add(new IdadeMinimaRequirement(18));
+                });
+            });
+
+            services.AddSingleton<IAuthorizationHandler, IdadeMinimaHandler>();
 
             services.AddScoped<FilmeService, FilmeService>();
             services.AddScoped<CinemaService, CinemaService>();

@@ -18,7 +18,8 @@ namespace UsuariosAPI.Services
             {
                 new Claim("username", usuario.UserName),
                 new Claim("id", usuario.Id.ToString()),
-                new Claim(ClaimTypes.Role, role)
+                new Claim(ClaimTypes.Role, role),
+                new Claim(ClaimTypes.DateOfBirth, usuario.DataNascimento.ToString())
             };
 
             // Gerar chave para criptografia
