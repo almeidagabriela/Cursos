@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using UsuariosAPI.Data;
+using UsuariosAPI.Models;
 using UsuariosAPI.Services;
 
 namespace UsuariosAPI
@@ -35,7 +36,7 @@ namespace UsuariosAPI
                 options.UseMySQL(Configuration.GetConnectionString("UsuarioConnection"))
             );
             // Definindo uso do Identity
-            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
+            services.AddIdentity<CustomIdentityUser, IdentityRole<int>>(
                     opt => opt.SignIn.RequireConfirmedEmail = true // Definindo a confirmação de email como obrigatória
                 )
                 .AddEntityFrameworkStores<UserDbContext>() // Definindo o que utilizaremos para armazenar os dados utilizados para identificação

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using UsuariosAPI.Models;
 
 namespace UsuariosAPI.Data
 {
@@ -12,7 +13,7 @@ namespace UsuariosAPI.Data
         IdentityRole represetando o papel
         int representando uma chave utilizada para identificação
     */
-    public class UserDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>
+    public class UserDbContext : IdentityDbContext<CustomIdentityUser, IdentityRole<int>, int>
     {
         private IConfiguration _configuration;
 
@@ -26,7 +27,7 @@ namespace UsuariosAPI.Data
             base.OnModelCreating(builder);
 
             // Criando um usuário ADMIN fora do fluxo de cadastro
-            IdentityUser<int> admin = new IdentityUser<int> 
+            CustomIdentityUser admin = new CustomIdentityUser 
             {
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
@@ -37,14 +38,14 @@ namespace UsuariosAPI.Data
                 Id = 99999 // O numero foi definido como um valor que temos certeza que não temos na base
             };
 
-            PasswordHasher<IdentityUser<int>> hasher = new PasswordHasher<IdentityUser<int>>();
+            PasswordHasher<CustomIdentityUser> hasher = new PasswordHasher<CustomIdentityUser>();
 
             admin.PasswordHash = hasher.HashPassword(
                 admin, 
                 _configuration.GetValue<string>("admininfo:password")
             );
 
-            builder.Entity<IdentityUser<int>>().HasData(admin);
+            builder.Entity<CustomIdentityUser>().HasData(admin);
 
             // Criando Roles
             builder.Entity<IdentityRole<int>>().HasData(

@@ -10,10 +10,10 @@ namespace UsuariosAPI.Services
     public class LoginService
     {
         // Gerenciador de login
-        private SignInManager<IdentityUser<int>> _signInManager;
+        private SignInManager<CustomIdentityUser> _signInManager;
         private TokenService _tokenService;
 
-        public LoginService(SignInManager<IdentityUser<int>> signInManager, TokenService tokenService = null)
+        public LoginService(SignInManager<CustomIdentityUser> signInManager, TokenService tokenService = null)
         {
             _signInManager = signInManager;
             _tokenService = tokenService;
@@ -53,7 +53,7 @@ namespace UsuariosAPI.Services
 
         public Result SolicitaResetSenhaUsuario(SolicitaResetRequest request)
         {
-            IdentityUser<int> identityUser = RecuperaUsuarioPorEmail(request.Email);
+            CustomIdentityUser identityUser = RecuperaUsuarioPorEmail(request.Email);
             
             if(identityUser != null)
             {
@@ -69,7 +69,7 @@ namespace UsuariosAPI.Services
 
         public Result ResetaSenhaUsuario(EfetuaResetRequest request)
         {
-            IdentityUser<int> identityUser = RecuperaUsuarioPorEmail(request.Email);
+            CustomIdentityUser identityUser = RecuperaUsuarioPorEmail(request.Email);
 
             // Realizando operação de reset de senha
             IdentityResult resultadoIdentity = _signInManager
@@ -80,7 +80,7 @@ namespace UsuariosAPI.Services
             return Result.Fail("Houve um erro na operação.");
         }
 
-        private IdentityUser<int> RecuperaUsuarioPorEmail(string email)
+        private CustomIdentityUser RecuperaUsuarioPorEmail(string email)
         {
             // Recuperando usuário a partir do email
             return _signInManager

@@ -14,16 +14,14 @@ namespace UsuariosAPI.Services
     public class CadastroService
     {
         private IMapper _mapper;
-        private UserManager<IdentityUser<int>> _userManager;
-        private RoleManager<IdentityRole<int>> _roleManager;
+        private UserManager<CustomIdentityUser> _userManager;
         private EmailService _emailService;
 
-        public CadastroService(IMapper mapper, UserManager<IdentityUser<int>> userManager, EmailService emailService, RoleManager<IdentityRole<int>> roleManager = null)
+        public CadastroService(IMapper mapper, UserManager<CustomIdentityUser> userManager, EmailService emailService, RoleManager<IdentityRole<int>> roleManager = null)
         {
             _mapper = mapper;
             _userManager = userManager;
             _emailService = emailService;
-            _roleManager = roleManager;
         }
 
         public Result CadastraUsuario(CreateUsuarioDto createDTO)
@@ -32,7 +30,7 @@ namespace UsuariosAPI.Services
             Usuario usuario = _mapper.Map<Usuario>(createDTO);
 
             // Conversão da Model para AspNetUsers (tabela gerada pelo Identity)
-            IdentityUser<int> usuarioIdentity = _mapper.Map<IdentityUser<int>>(usuario);
+            CustomIdentityUser usuarioIdentity = _mapper.Map<CustomIdentityUser>(usuario);
 
             // Criar usuário de maneira assincrona
             Task<IdentityResult> resultadoIdentity = _userManager
